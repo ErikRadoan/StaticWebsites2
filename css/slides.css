@@ -1,0 +1,1081 @@
+/* ============================================================
+   SLIDES.CSS — Layout & styling for all slide types
+   Secure-Inf presentation
+   ============================================================ */
+
+/* ---------- Presentation Container ---------- */
+#presentation {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* ---------- Base Slide ---------- */
+.slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+        opacity var(--duration) var(--ease-out-expo),
+        visibility var(--duration);
+    background: var(--bg-primary);
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* ---------- Slide Content Wrapper ---------- */
+.slide__content {
+    max-width: var(--slide-max-w);
+    width: 100%;
+    padding: var(--slide-pad);
+}
+
+/* ---------- Slide Heading ---------- */
+.slide__heading {
+    margin-bottom: 1.25rem;
+    color: var(--text-primary);
+}
+
+/* ---------- Slide Label ---------- */
+.slide__label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+}
+
+/* ---------- Slide Author / Meta ---------- */
+.slide__author {
+    font-size: 1.35rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+.slide__meta {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-top: 0.35rem;
+}
+
+/* ---------- Divider Line ---------- */
+.slide__divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--highlight));
+    border-radius: 2px;
+    margin: 1.5rem 0;
+}
+
+/* ============================================================
+   SLIDE 1 — Title
+   ============================================================ */
+.slide--title {
+    text-align: center;
+    background:
+        radial-gradient(ellipse at 30% 50%, var(--accent-glow) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(240,185,82,0.05) 0%, transparent 50%),
+        var(--bg-primary);
+}
+
+.slide--title .slide__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.slide--title .slide__heading {
+    font-size: 2.8rem;
+    max-width: 860px;
+}
+
+.slide--title .slide__divider {
+    width: 120px;
+}
+
+/* Animated grid lines background on title */
+.slide--title::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0,212,170,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,170,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ---------- Section Title Slide ---------- */
+.slide--section {
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Section content must fill the entire slide so text is truly centred in the viewport */
+.slide--section .slide__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: none;          /* remove 1100 px cap — fill the slide */
+    width: 100%;
+    height: 100%;
+    padding: var(--slide-pad);
+    position: relative;
+    z-index: 1;
+}
+
+.slide--section .slide__heading {
+    font-size: 2.6rem;
+    max-width: 750px;
+}
+
+/* Section with scanning animation */
+.slide--section-scan {
+    background: var(--bg-primary);
+}
+.slide--section-scan .slide__content {
+    position: relative;
+}
+
+/* ============================================================
+   SLIDE — Outline
+   ============================================================ */
+.slide--outline .slide__content {
+    max-width: 800px;
+}
+
+.outline-list {
+    list-style: none;
+    margin-top: 0.5rem;
+}
+
+.outline-list li {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+}
+
+.outline-list li:last-child { border-bottom: none; }
+
+.outline-num {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    min-width: 2.5rem;
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+}
+
+/* ============================================================
+   SLIDE — Text + Image (left text, right image)
+   ============================================================ */
+.slide--two-col .slide__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.slide__subheading {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 0.6rem;
+}
+
+.slide__image-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.slide__image-wrap img {
+    max-width: 100%;
+    max-height: 52vh;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.slide__image-caption {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: center;
+    font-family: var(--font-mono);
+    line-height: 1.5;
+}
+
+/* slide-list */
+.slide-list {
+    list-style: none;
+    margin-top: 0.5rem;
+}
+
+.slide-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.45rem 0;
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+.bullet {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    min-width: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-top: 0.55rem;
+}
+
+/* ============================================================
+   SLIDE — Architecture / diagram split
+   ============================================================ */
+.slide--arch .slide__content {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2.5rem;
+    align-items: start;
+    max-height: 90vh;
+}
+
+.arch-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.arch-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ============================================================
+   SLIDE — Auth chain (3-factor)
+   ============================================================ */
+.slide--auth .slide__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 900px;
+    padding: 48px;
+}
+
+.auth-chain {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-top: 0.5rem;
+}
+
+.auth-factor {
+    flex: 1;
+    padding: 1.5rem 1.25rem;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    border-radius: 10px;
+    position: relative;
+    transition: border-color 0.3s;
+}
+
+.auth-factor:not(:last-child) {
+    margin-right: 0;
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+}
+
+.auth-factor:not(:first-child):not(:last-child) {
+    border-radius: 0;
+}
+
+.auth-factor:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.auth-factor--fido2 { border-top-color: var(--accent); }
+.auth-factor--bio   { border-top-color: var(--highlight); }
+.auth-factor--fp    { border-top-color: var(--danger); }
+
+.auth-factor__icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.auth-factor__label {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.25rem;
+}
+
+.auth-factor--bio .auth-factor__label   { color: var(--highlight); }
+.auth-factor--fp  .auth-factor__label   { color: var(--danger); }
+
+.auth-factor__title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+}
+
+.auth-factor__desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.auth-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+}
+
+.auth-nonce-note {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    padding: 0.6rem 1rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* ============================================================
+   SLIDE — Topology diagram
+   ============================================================ */
+.slide--topology .slide__content {
+    display: grid;
+    grid-template-columns: 1fr 1.7fr;   /* give diagram column more room */
+    gap: 2rem;
+    align-items: center;
+    max-width: 1280px;                  /* wider cap so SVG can breathe */
+}
+
+.topo-text { display: flex; flex-direction: column; }
+
+.topo-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topo-svg {
+    width: 100%;
+    max-width: none;    /* remove cap — let it fill the column */
+    height: auto;
+}
+
+/* ============================================================
+   SLIDE — Node table
+   ============================================================ */
+.slide--nodes .slide__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 48px 64px;
+}
+
+.node-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+.node-table th {
+    text-align: left;
+    padding: 0.6rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    border-bottom: 2px solid var(--border-accent);
+    background: var(--bg-tertiary);
+}
+
+.node-table td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    vertical-align: middle;
+}
+
+.node-table tr:hover td { background: var(--bg-tertiary); }
+
+.node-badge {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+}
+
+.node-badge--control { background: rgba(0,212,170,0.15); color: var(--accent); }
+.node-badge--worker  { background: rgba(88,166,255,0.15); color: #58a6ff; }
+
+/* ============================================================
+   SLIDE — SolarOS boot sequence
+   ============================================================ */
+.slide--solaros .slide__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.solaros-text { display: flex; flex-direction: column; }
+
+.boot-sequence {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    font-family: var(--font-mono);
+}
+
+.boot-step {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem 1rem;
+    border-left: 2px solid var(--border);
+    position: relative;
+    transition: border-color 0.2s;
+}
+
+.boot-step:first-child { border-radius: 4px 4px 0 0; }
+.boot-step:last-child  { border-radius: 0 0 4px 4px; }
+
+.boot-step--active { border-left-color: var(--accent); background: rgba(0,212,170,0.05); }
+.boot-step--warn   { border-left-color: var(--highlight); background: rgba(240,185,82,0.05); }
+.boot-step--done   { border-left-color: #2d6cb4; }
+
+.boot-step__phase {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    min-width: 60px;
+    color: var(--accent);
+}
+
+.boot-step--warn .boot-step__phase  { color: var(--highlight); }
+.boot-step--done .boot-step__phase  { color: var(--text-muted); }
+
+.boot-step__desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+.boot-step__status {
+    margin-left: auto;
+    font-size: 0.75rem;
+}
+
+/* ============================================================
+   SLIDE — Services / microservices
+   ============================================================ */
+.slide--services .slide__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 48px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.service-card {
+    padding: 1.1rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: border-color 0.25s, background 0.25s;
+}
+
+.service-card:hover {
+    border-color: var(--accent);
+    background: var(--bg-tertiary);
+}
+
+.service-card__name {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+}
+
+.service-card__role {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+}
+
+.service-card__desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.service-card--gateway { border-top: 2px solid var(--accent); }
+.service-card--identity { border-top: 2px solid var(--highlight); }
+.service-card--session  { border-top: 2px solid #58a6ff; }
+.service-card--database { border-top: 2px solid #7c4dff; }
+.service-card--reactor  { border-top: 2px solid var(--danger); }
+.service-card--logging  { border-top: 2px solid #26c6da; }
+
+/* ============================================================
+   SLIDE — PLG Logging
+   ============================================================ */
+.slide--plg .slide__content {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.plg-text { display: flex; flex-direction: column; }
+
+.plg-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    font-family: var(--font-mono);
+}
+
+.plg-layer {
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--border);
+    position: relative;
+}
+
+.plg-layer:first-child { border-radius: 8px 8px 0 0; }
+.plg-layer:last-child  { border-radius: 0 0 8px 8px; }
+.plg-layer:not(:last-child) { border-bottom: none; }
+
+.plg-layer--promtail { background: rgba(0,212,170,0.06); border-left: 3px solid var(--accent); }
+.plg-layer--loki     { background: rgba(240,185,82,0.06); border-left: 3px solid var(--highlight); }
+.plg-layer--grafana  { background: rgba(239,83,80,0.06); border-left: 3px solid var(--danger); }
+
+.plg-layer__name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.plg-layer--promtail .plg-layer__name { color: var(--accent); }
+.plg-layer--loki .plg-layer__name     { color: var(--highlight); }
+.plg-layer--grafana .plg-layer__name  { color: var(--danger); }
+
+.plg-layer__desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.plg-arrow {
+    text-align: center;
+    padding: 0.2rem;
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* ============================================================
+   SLIDE — Security analysis
+   ============================================================ */
+.slide--security .slide__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 48px;
+}
+
+.threat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.threat-card {
+    padding: 1rem 1.1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    border-left: 3px solid;
+}
+
+.threat-card--mitigated { border-left-color: var(--accent); }
+.threat-card--partial   { border-left-color: var(--highlight); }
+.threat-card--known-limit { border-left-color: var(--danger); }
+
+.threat-card__label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.3rem;
+}
+
+.threat-card--mitigated .threat-card__label   { color: var(--accent); }
+.threat-card--partial .threat-card__label     { color: var(--highlight); }
+.threat-card--known-limit .threat-card__label { color: var(--danger); }
+
+.threat-card__title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+}
+
+.threat-card__desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* ============================================================
+   SLIDE — Tunnel / network access
+   ============================================================ */
+.slide--tunnels .slide__content {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.tunnels-text { display: flex; flex-direction: column; }
+
+.tunnel-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.tunnel-card {
+    padding: 0.9rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.tunnel-card__icon {
+    font-size: 1.3rem;
+    min-width: 1.8rem;
+    text-align: center;
+}
+
+.tunnel-card__body { flex: 1; }
+
+.tunnel-card__name {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.15rem;
+}
+
+.tunnel-card--admin .tunnel-card__name   { color: var(--highlight); }
+.tunnel-card--wireguard .tunnel-card__name { color: #58a6ff; }
+
+.tunnel-card__desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* ============================================================
+   SLIDE — Results / Conclusion
+   ============================================================ */
+.slide--results .slide__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+    padding: 48px 64px;
+}
+
+.results-text { display: flex; flex-direction: column; }
+
+.result-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-accent);
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+}
+
+.result-badge--accent { border-color: rgba(240,185,82,0.3); }
+
+.result-num {
+    font-family: var(--font-mono);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.result-badge--accent .result-num { color: var(--highlight); }
+
+.result-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+.results-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.6rem 0.75rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.check-icon {
+    color: var(--accent);
+    font-size: 0.9rem;
+    min-width: 1rem;
+    margin-top: 0.1rem;
+}
+
+/* ============================================================
+   SLIDE — End / Thank you
+   ============================================================ */
+.slide--end {
+    text-align: center;
+    background:
+        radial-gradient(ellipse at 50% 40%, var(--accent-glow) 0%, transparent 60%),
+        var(--bg-primary);
+}
+
+.slide--end .slide__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: none;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.slide--end .slide__heading {
+    font-size: 2.8rem;
+}
+
+/* ============================================================
+   SLIDE — Sources
+   ============================================================ */
+.slide--sources .slide__content {
+    max-width: 900px;
+    padding: 48px;
+}
+
+.slide__content--sources {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sources-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.sources-list li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.src-tag {
+    display: inline-block;
+    min-width: 90px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.15rem 0.4rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+.src-url {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+}
+
+/* ============================================================
+   SLIDE — Canvas background section
+   ============================================================ */
+.slide--canvas-bg {
+    /* position is already absolute from .slide base — just ensure overflow clips */
+    overflow: hidden;
+}
+
+.slide-canvas-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.slide--canvas-bg .slide__content {
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================================
+   SLIDE — mTLS / certificate chain
+   ============================================================ */
+.slide--mtls .slide__content {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.mtls-text { display: flex; flex-direction: column; }
+
+.cert-chain {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+}
+
+.cert-node {
+    padding: 0.8rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    position: relative;
+    transition: border-color 0.2s;
+}
+
+.cert-node:first-child { border-radius: 8px 8px 0 0; }
+.cert-node:last-child  { border-radius: 0 0 8px 8px; }
+.cert-node:not(:last-child) { border-bottom: none; }
+
+.cert-node--root    { border-left: 3px solid var(--danger);    background: rgba(239,83,80,0.05); }
+.cert-node--service { border-left: 3px solid var(--accent);    background: rgba(0,212,170,0.04); }
+.cert-node--gateway { border-left: 3px solid var(--highlight); background: rgba(240,185,82,0.04); }
+
+.cert-node__label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.2rem;
+}
+
+.cert-node--root .cert-node__label    { color: var(--danger); }
+.cert-node--service .cert-node__label { color: var(--accent); }
+.cert-node--gateway .cert-node__label { color: var(--highlight); }
+
+.cert-node__name {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.cert-node__desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.1rem;
+}
+
+.cert-arrow {
+    text-align: left;
+    padding: 0.15rem 0 0.15rem 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    background: var(--bg-primary);
+}
+
+/* ============================================================
+   CANVAS — Particle network
+   ============================================================ */
+.particle-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.45;
+}
+
+/* ============================================================
+   Heading accent span
+   ============================================================ */
+.heading-accent {
+    color: var(--accent);
+}
+
+.heading-accent--warn {
+    color: var(--highlight);
+}
+
+/* ============================================================
+   Misc shared utility
+   ============================================================ */
+.text-accent  { color: var(--accent); }
+.text-warn    { color: var(--highlight); }
+.text-danger  { color: var(--danger); }
+.text-muted   { color: var(--text-muted); }
+.text-mono    { font-family: var(--font-mono); }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+
+/* ============================================================
+   STORY SLIDES — Non-technical process walkthrough
+   ============================================================ */
+.slide--story .slide__content,
+.slide--story-devices .slide__content {
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0.75rem 1.5rem;
+}
+
+.story-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.story-svg {
+    width: 100%;
+    max-height: 76vh;
+    display: block;
+    margin: 0 auto;
+}
+
+.story-svg--single {
+    max-width: 1080px;
+}
+
+.story-svg--chain {
+    max-width: 980px;
+}
+
+.story-svg--devices {
+    max-width: 920px;
+}
+
+.story-svg--infra {
+    max-width: 1080px;
+}
+
+@media (max-width: 1024px) {
+    .story-svg {
+        max-height: 68vh;
+    }
+
+    .story-svg--single,
+    .story-svg--chain,
+    .story-svg--devices,
+    .story-svg--infra {
+        max-width: 100%;
+    }
+}
+/* ── Story slides shared ─────────────────────────────── */
+.slide--story2 .slide__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+.slide--story2 svg {
+  width: 100%;
+  height: 100%;
+  max-height: 90vh;
+  display: block;
+}
+@keyframes migrate-pulse {
+  0%, 100% { opacity: 0; }
+  40%, 60% { opacity: 1; }
+}
+.migrate-arrow { animation: migrate-pulse 2s ease-in-out infinite; }
+
+@keyframes danger-pulse {
+  0%, 100% { opacity: 0.25; }
+  50%       { opacity: 0.65; }
+}
+.danger-pulse { animation: danger-pulse 1.2s ease-in-out infinite; }
+

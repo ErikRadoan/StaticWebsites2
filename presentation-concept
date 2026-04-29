@@ -1,0 +1,45 @@
+1. slide - title
+
+2. slide:
+- a picture of critical infrastructure
+
+3. slide:
+- a picture of critical infrastructure hidden in a bunker
+
+4. slide:
+- goals
+ - allow operators to use any device to access critical infrastructure
+ - allow operators access to critical infrastructure from anywhere
+ - guarantee security of critical infrastructure
+
+5. slide:
+ - solution for any device access:
+ - Live SolarOS operating system with modified systemd startup scripts flashed on a USB drive
+
+6. slide:
+ - solution for anywhere access:
+ - a cloudflare tunnel connected through a Cloud LAN and accessed through a custom domain
+ - a custom WARP connector from admin access
+
+7. slide:
+ - solution for security title
+
+8. slide:
+ - 3 Factor Authentication using a Yubikey, OS fingerprint, and a biometric factor
+
+9. slide:
+ - backend services for handling auth requests. Gateway service, Session management service, Database service.
+
+10. slide:
+ - defense in depth strategy:
+ - kubernetes separated services, network segmentation, custom network policies, mTLS between services, multiple nodes running pods.
+
+11. slide:
+ - custom monitoring and alerting system:
+ - loki and grafana for log aggregation and visualization, custom alerting rules for suspicious activity
+
+12. slide:
+ - thank you for your attention
+
+
+
